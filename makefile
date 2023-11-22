@@ -1,11 +1,11 @@
-# Makefile for a project with main.cpp and hash.hpp
+# Makefile for a project with main.cpp, hash.hpp, and hash.cpp
 
 # Compiler and flags
 CC = g++
 CFLAGS = -std=c++11 -Wall
 
 # Source files
-SRCS = main.cpp
+SRCS = main.cpp hash.cpp
 HEADERS = hash.hpp
 
 # Object files
@@ -29,4 +29,3 @@ run: $(TARGET)
 # Clean rule to remove object files and the executable
 clean:
 	rm -f $(OBJS) $(TARGET)
-

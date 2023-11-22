@@ -23,5 +23,10 @@ int main() {
     h.imprimeHash();
     std::string word_to_search[] = {"hola", "mundo"}; 
 
+    std::cout << "About to call returnValues()..." << std::endl;
+
+    std::string sentence = "hola mundo 1209874 1209874"; 
+
     int counter = h.returnValues("hola mundo", word_to_search);
+    std::cout << "counter: " << counter << std::endl;
 }
