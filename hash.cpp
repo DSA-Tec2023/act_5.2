@@ -6,9 +6,9 @@ int Hash::funcionHash(const std::string& key) {
 // A simple hash function for strings
     int sum = 0;
     for (char ch : key) {
-        sum += static_cast<int>(ch);
+        sum += static_cast<int>(ch); // Convert char to int and add to sum in order to get the sum of all chars in the string
     }
-    return sum % BUCKET;
+    return sum % BUCKET; // Return the sum of all chars in the string modulo the number of buckets, in order to get the index of the bucket
 
 }
 
