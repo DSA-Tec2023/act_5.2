@@ -16,62 +16,15 @@ public:
 
 private:
     // función de hash que calcula la posición en la tabla
-    int funcionHash(int x) {
-        //    return (x % BUCKET);
-        return (x % BUCKET);
-    }
+    int funcionHash(int x);
 
 public:
     //Insertar un elemento en la tabla
-    void insertaElemento(int key) {
-        int index = funcionHash(key);
-        table[index].push_back(key);
-    }
+    void insertaElemento(int key); 
+    void imprimeHash();
+    void borraElemento(int variable);
 
-    void imprimeHash() {
-        std::cout << "Printing hash table...\n\n";
-        for (int i = 0; i < BUCKET; i++) {
-            std::cout << i;
-            for (auto x : table[i])
-                std::cout << " --> " << x;
-            std::cout << std::endl;
-        }
-    }
-
-    void borraElemento(int variable) {
-        int index = funcionHash(variable);
-        std::list<int>::iterator i;
-        for (i = table[index].begin();
-                i != table[index].end(); i++) {
-            if (*i == variable)
-                break;
-        }
-
-        if (i != table[index].end())
-            table[index].erase(i);
-    }
-
-/**
- * @brief This function is _suposed_ to be used to return the values of the words that are found in the sentence. It is not working yet. It is still in development. 
- * 
- * @param sentence 
- * @param word_to_search 
- * @return int 
- */
-
-    int returnValues(std::string sentence, std::string word_to_search[]) {
-        std::istringstream iss(sentence);
-        int counter = 0;
-        do {
-            std::string subs;
-
-            // Get the word from the istringstream
-            iss >> subs;
-
-            // if word is found in the sentence then increment counter based on the value of the word
-            std::cout << subs << std::endl;
-            
-        } while (iss);
-        return counter;
-    }
+    // These functions are in development and are not part of the initial template.
+    int returnValues(std::string sentence, std::string word_to_search[]);
+    int get_value(int key);
 };
