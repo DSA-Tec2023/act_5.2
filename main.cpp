@@ -10,23 +10,23 @@ int main() {
 // insertar las llaves en la tabla de hash
     Hash h(9); // 7 es el número de buckets en la tabla de hash
     for (int i = 0; i < n; i++)
-        h.insertaElemento(a[i]);
+        h.insertaElemento(std::to_string(a[i]), a[i]);
+
+    h.insertaElemento("hola", 1);
 
 // mostrar la tabla de Hash
     h.imprimeHash();
 
 // eliminar 11
 //h.borraElemento(11);
-    h.borraElemento(242345);
-
+    h.borraElemento("111234");
 // mostrar la tabla de Hash
     h.imprimeHash();
-    std::string word_to_search[] = {"hola", "mundo"}; 
 
-    std::cout << "About to call returnValues()..." << std::endl;
+    std::string sentence = "hola mundo 1209874 1209874";
 
-    std::string sentence = "hola mundo 1209874 1209874"; 
-
-    int counter = h.returnValues("hola mundo", word_to_search);
+    int counter = h.returnValues(sentence);
     std::cout << "counter: " << counter << std::endl;
+
+    h.print_value("hola");
 }

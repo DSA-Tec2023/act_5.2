@@ -2,33 +2,37 @@
 
 // Private functions
 
-int Hash::funcionHash(int x) {
-    return (x % BUCKET);
+int Hash::funcionHash(const std::string& key) {
+// A simple hash function for strings
+    int sum = 0;
+    for (char ch : key) {
+        sum += static_cast<int>(ch);
+    }
+    return sum % BUCKET;
+
 }
 
 // Public functions
-
-void Hash::insertaElemento(int key) {
+void Hash::insertaElemento(const std::string& key, int value) {
     int index = funcionHash(key);
-    table[index].push_back(key);
+    table[index].push_back(std::make_pair(key, value));
 }
 
 void Hash::imprimeHash() {
     std::cout << "Printing hash table...\n\n";
     for (int i = 0; i < BUCKET; i++) {
         std::cout << i;
-        for (auto x : table[i])
-            std::cout << " --> " << x;
+        for (auto pair : table[i])
+            std::cout << " --> " << pair.first << ":" << pair.second;
         std::cout << std::endl;
     }
 }
 
-void Hash::borraElemento(int variable) {
-    int index = funcionHash(variable);
-    std::list<int>::iterator i;
-    for (i = table[index].begin();
-            i != table[index].end(); i++) {
-        if (*i == variable)
+void Hash::borraElemento(const std::string& key) {
+    int index = funcionHash(key);
+    std::list<std::pair<std::string, int> >::iterator i;
+    for (i = table[index].begin(); i != table[index].end(); i++) {
+        if (i->first == key)
             break;
     }
 
@@ -36,22 +40,14 @@ void Hash::borraElemento(int variable) {
         table[index].erase(i);
 }
 
-/**
- * @brief This function is _suposed_ to be used to return the values of the words that are found in the sentence. It is not working yet. It is still in development.
- *
- * @param sentence
- * @param word_to_search
- * @return int
- */
-
-int Hash::returnValues(std::string sentence, std::string word_to_search[]) {
+int Hash::returnValues(const std::string& sentence) {
     std::istringstream iss(sentence);
     int counter = 0;
     do {
         std::string subs;
         iss >> subs;
 
-        int value = get_value(std::stoi(subs));
+        int value = get_value(subs);
 
         if (value != 0) { // Check if value is not 0
             std::cout << subs << std::endl;
@@ -62,13 +58,23 @@ int Hash::returnValues(std::string sentence, std::string word_to_search[]) {
     return counter;
 }
 
-int Hash::get_value(int key) { 
+int Hash::get_value(const std::string& key) {
     for (int i = 0; i < BUCKET; i++) {
-        for (auto x : table[i]) {
-            if (x == key) {
-                return x;
+        for (auto pair : table[i]) {
+            if (pair.first == key) {
+                return pair.second;
             }
         }
     }
-    return -1; 
+    return 0; // Return 0 if key is not found
+}
+
+void Hash::print_value(const std::string& key) {
+    for (int i = 0; i < BUCKET; i++) {
+        for (auto pair : table[i]) {
+            if (pair.first == key) {
+                std::cout << pair.first << " has the value of " << pair.second << std::endl;
+            }
+        }
+    }
 }
