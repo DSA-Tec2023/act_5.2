@@ -1,5 +1,5 @@
 # Actividad 5.2 
-## Programación de Estructura de Datos y Algoritmos Fundamentales
+## Programación de Estructuras de Datos y Algoritmos Fundamentales
 
 ### Equipo 
 - Andrés Martínez, A00227463
