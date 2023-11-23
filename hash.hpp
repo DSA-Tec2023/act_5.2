@@ -27,5 +27,6 @@ public:
     // These functions are in development and are not part of the initial template.
     int returnValues(const std::string& sentence);
     int get_value(const std::string& key);
-    void print_value(const std::string& key); 
+    void print_value(const std::string& key);
+    void read_file(const std::string& filename); 
 };

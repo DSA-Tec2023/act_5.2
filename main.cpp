@@ -23,10 +23,9 @@ int main() {
 // mostrar la tabla de Hash
     h.imprimeHash();
 
-    std::string sentence = "hola mundo 1209874 1209874";
+    std::string sentence = "hola hola hola";
 
     int counter = h.returnValues(sentence);
     std::cout << "counter: " << counter << std::endl;
 
-    h.print_value("hola");
 }
