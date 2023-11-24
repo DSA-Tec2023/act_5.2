@@ -35,6 +35,11 @@ void Hash::imprimeHash() {
     }
 }
 
+/**
+ * @brief Ésta función borra un elemento de la tabla hash, dado su key.
+ * 
+ * @param key 
+ */
 void Hash::borraElemento(const std::string& key) {
     int index = funcionHash(key);
     std::list<std::pair<std::string, int> >::iterator i;
@@ -63,7 +68,7 @@ int Hash::returnValues(const std::string& sentence) {
 }
 
 /**
- * @brief This function returns the value of a key in the hash table.
+ * @brief Esta función regresa el valor de una key en la tabla hash.
  *
  * @param key
  * @return int
@@ -77,11 +82,11 @@ int Hash::get_value(const std::string& key) {
             }
         }
     }
-    return 0; // Return 0 if key is not found
+    return 0; // Regresa 0 si no encuentra la key en la tabla hash.
 }
 
 /**
- * @brief This function prints the value of a key in the hash table.
+ * @brief Esta función printea un valor dependiendo de su clave o key.
  *
  * @param key
  */
@@ -118,7 +123,7 @@ void Hash::read_file(const std::string& filename) {
         int value;
         iss >> key >> value;
         insertaElemento(key, value);
-    } // Up until this point it works. The problem is in the next for loop.
+    }
 
     for (int i = 0; i < sentenceNo; i++) {
         int contador = 0;
