@@ -5,6 +5,17 @@
 #include <sstream>
 
 // Private functions
+/*
+    Implementación de las funciones hash.
+
+    Equipo:
+    - Andrés Martínez, A00227463
+    - Fernanda Granados, A01252895
+    - Santiago Poblete, A01254609
+    - Martín Tánori, A01252900
+
+*/
+
 
 int Hash::funcionHash(const std::string& key) {
 // A simple hash function for strings

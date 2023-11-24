@@ -3,6 +3,17 @@
 #include <string>
 #include <sstream>
 
+/*
+    Declaración de la clase Hash y sus funciones.
+
+    Equipo:
+    - Andrés Martínez, A00227463
+    - Fernanda Granados, A01252895
+    - Santiago Poblete, A01254609
+    - Martín Tánori, A01252900
+
+*/
+
 class Hash {
 public:
    int BUCKET; // número de buckets
