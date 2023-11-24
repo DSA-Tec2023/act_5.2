@@ -1,6 +1,8 @@
 #include "hash.hpp"
 #include <fstream>
 #include <iostream>
+#include <string>
+#include <sstream>
 
 // Private functions
 
@@ -8,9 +10,12 @@ int Hash::funcionHash(const std::string& key) {
 // A simple hash function for strings
     int sum = 0;
     for (char ch : key) {
-        sum += static_cast<int>(ch); // Convert char to int and add to sum in order to get the sum of all chars in the string
+        sum += static_cast<int>(ch); 
+
+        // Convierte char a int y agrega a la suma para obtener la suma de todos los caracteres en la cadena
     }
-    return sum % BUCKET; // Return the sum of all chars in the string modulo the number of buckets, in order to get the index of the bucket
+    return sum % BUCKET; 
+    // Regresa el valor de la suma de todos los caracteres en la cadena modulo el número de buckets, para obtener el índice del bucket
 
 }
 
@@ -21,7 +26,7 @@ void Hash::insertaElemento(const std::string& key, int value) {
 }
 
 void Hash::imprimeHash() {
-    std::cout << "Printing hash table...\n\n";
+    std::cout << "Printeando Tabla Hash...\n\n";
     for (int i = 0; i < BUCKET; i++) {
         std::cout << i;
         for (auto pair : table[i])
@@ -48,11 +53,8 @@ int Hash::returnValues(const std::string& sentence) {
     do {
         std::string subs;
         iss >> subs;
-
         int value = get_value(subs);
-
         if (value != 0) { // Check if value is not 0
-            std::cout << subs << std::endl;
             counter += value;
         }
 
@@ -87,9 +89,9 @@ int Hash::get_value(const std::string& key) {
 void Hash::print_value(const std::string& key) {
     int val = get_value(key);
     if (val != 0) {
-        std::cout << "Value of key " << key << ": " << val << std::endl;
+        std::cout << "El valor de la clave " << key << ": " << val << std::endl;
     } else {
-        std::cout << "Key not found." << std::endl;
+        std::cout << "Clave no encontrada." << std::endl;
     }
 }
 
@@ -102,26 +104,31 @@ void Hash::print_value(const std::string& key) {
 void Hash::read_file(const std::string& filename) {
     std::ifstream file(filename);
     std::string line;
-    // first line is: the number of buckets and the sentences to be processed, separated by a space
     std::getline(file, line);
     std::istringstream iss(line);
-    iss >> BUCKET;
-    std::string sentence;
-    iss >> sentence;
+    int n, sentenceNo;
 
-    std::cout << "Sentence: "  << sentence << std::endl;
+    iss >> n;
+    iss >> sentenceNo;
 
-    if (file.is_open()) {
-        std::string line;
-        while (std::getline(file, line)) {
+    for (int i = 0; i < n; i++) {
+        std::getline(file, line);
+        std::istringstream iss(line);
+        std::string key;
+        int value;
+        iss >> key >> value;
+        insertaElemento(key, value);
+    } // Up until this point it works. The problem is in the next for loop.
+
+    for (int i = 0; i < sentenceNo; i++) {
+        int contador = 0;
+        while (std::getline(file, line) && line != ".") {
             std::istringstream iss(line);
-            std::string key;
-            int value;
-            iss >> key >> value;
-            insertaElemento(key, value);
+            std::string sentence;
+            std::getline(iss, sentence);
+            contador += returnValues(sentence);
         }
-        file.close();
-    } else {
-        std::cout << "Unable to open file: " << filename << std::endl;
+        std::cout << contador << std::endl;
+        contador = 0;
     }
 }
