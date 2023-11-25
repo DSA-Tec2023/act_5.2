@@ -16,16 +16,15 @@
 
 */
 
-
 int Hash::funcionHash(const std::string& key) {
 // A simple hash function for strings
     int sum = 0;
     for (char ch : key) {
-        sum += static_cast<int>(ch); 
+        sum += static_cast<int>(ch);
 
         // Convierte char a int y agrega a la suma para obtener la suma de todos los caracteres en la cadena
     }
-    return sum % BUCKET; 
+    return sum % BUCKET;
     // Regresa el valor de la suma de todos los caracteres en la cadena modulo el número de buckets, para obtener el índice del bucket
 
 }
@@ -48,8 +47,8 @@ void Hash::imprimeHash() {
 
 /**
  * @brief Ésta función borra un elemento de la tabla hash, dado su key.
- * 
- * @param key 
+ *
+ * @param key
  */
 void Hash::borraElemento(const std::string& key) {
     int index = funcionHash(key);
@@ -86,14 +85,13 @@ int Hash::returnValues(const std::string& sentence) {
  */
 
 int Hash::get_value(const std::string& key) {
-    for (int i = 0; i < BUCKET; i++) {
-        for (auto pair : table[i]) {
-            if (pair.first == key) {
-                return pair.second;
-            }
-        }
+    int index = funcionHash(key);
+    std::list<std::pair<std::string, int> >::iterator i;
+    for (i = table[index].begin(); i != table[index].end(); i++) {
+        if (i->first == key)
+            return i->second;
     }
-    return 0; // Regresa 0 si no encuentra la key en la tabla hash.
+    return 0; // Si no se encuentra la key, regresa 0
 }
 
 /**

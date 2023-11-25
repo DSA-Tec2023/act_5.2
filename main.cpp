@@ -14,6 +14,6 @@
 
 int main() {
 
-    Hash h(9);
-    h.read_file("input.txt");
+    Hash hash_table(9);
+    hash_table.read_file("input.txt");
 }
